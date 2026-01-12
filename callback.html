@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Authenticating...</title>
+  <!-- Import map for local bundled libraries (edit paths if needed) -->
+  <script type="importmap">
+  {
+    "imports": {
+      "@atproto/oauth-client-browser": "./lib/oauth-client-browser.js"
+    }
+  }
+  </script>
+  <style>
+    body { font-family: system-ui; max-width: 600px; margin: 2rem auto; padding: 0 1rem; }
+  </style>
+</head>
+<body>
+  <p>Authenticating...</p>
+  <script type="module">
+    import { BrowserOAuthClient } from '@atproto/oauth-client-browser'
+
+    const client = new BrowserOAuthClient({
+      handleResolver: 'https://bsky.social',
+      clientMetadata: undefined, // Loopback mode - update for production
+    })
+
+    async function handleCallback() {
+      try {
+        const result = await client.init()
+        if (result) {
+          window.location.href = '/'
+        } else {
+          document.body.innerHTML = '<p>No session found. <a href="/">Go back</a></p>'
+        }
+      } catch (err) {
+        console.error('Callback error:', err)
+        document.body.innerHTML = `<p>Error: ${err.message}</p><p><a href="/">Try again</a></p>`
+      }
+    }
+
+    handleCallback()
+  </script>
+</body>
+</html>

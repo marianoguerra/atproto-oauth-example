@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AT Protocol OAuth Demo</title>
+  <!-- Import map for local bundled libraries (edit paths if needed) -->
+  <script type="importmap">
+  {
+    "imports": {
+      "@atproto/oauth-client-browser": "./lib/oauth-client-browser.js",
+      "@atproto/api": "./lib/api.js"
+    }
+  }
+  </script>
+  <link rel="stylesheet" href="./src/styles.css">
+</head>
+<body>
+  <h1>AT Protocol OAuth Demo</h1>
+
+  <div id="loading">Loading...</div>
+
+  <div id="login-section" class="hidden">
+    <form id="login-form">
+      <input type="text" id="handle" placeholder="handle.bsky.social" required>
+      <button type="submit">Sign In</button>
+    </form>
+    <p id="error" class="hidden"></p>
+  </div>
+
+  <div id="profile-section" class="hidden">
+    <div id="profile"></div>
+    <button id="logout-btn">Sign Out</button>
+  </div>
+
+  <script type="module" src="./src/app.js"></script>
+</body>
+</html>
